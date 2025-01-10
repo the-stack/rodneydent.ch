@@ -1,0 +1,35 @@
+$primary: #67522D;
+$primaryOp40: rgba($primary, 0.4);
+$secondary: #D5C7AE;
+$secondaryOp80: rgba($secondary, 0.8);
+$third: #4C443D;
+$thirdOP40: rgba($third, 0.4);
+$accent: #622E37;
+$negative: rgba(255, 253, 245,1);
+
+@use "sass:meta";
+
+@mixin syntax-colors($args...) {
+  @debug meta.keywords($args);
+  @each $name, $color in meta.keywords($args) {
+    .bg-#{$name} {
+      background-color: $color;
+    }
+    .bg-lighten-#{$name} {
+      background-color: lighten($color, 5%);
+    }
+    .text-#{$name} {
+      color: $color;
+    }
+  }
+}
+
+@include syntax-colors(
+        $primary: #67522D,
+        $primaryOp40: rgba($primary, 0.4),
+        $secondary: #D5C7AE,
+        $secondaryOp80: rgba($secondary, 0.8),
+        $third: #4C443D,
+        $thirdOP40: rgba($third, 0.4),
+        $negative: rgba(255, 253, 245,1)
+);

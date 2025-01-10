@@ -1,0 +1,491 @@
+@import "colors";
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html, *, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+$layout-breakpoint-tablet: 767px;
+$layout-breakpoint-laptop: 1040px;
+$layout-breakpoint-desktop: 1440px;
+
+.cursor--pointer {
+  cursor: pointer;
+}
+
+.button, a.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondaryOp80;
+  border: 2px solid $third;
+  color: $third;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-right: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  width: 33%;
+  min-width: 200px;
+  max-width: 350px;
+  height: 34px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($third, 0.7);
+    color: #FFF;
+  }
+
+  &.active {
+    background-color: $third;
+    color: #FFF;
+  }
+}
+
+.button--fab {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondaryOp80;
+  border: 2px solid $third;
+  color: $third;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+
+  & path {
+    fill: $third;
+  }
+}
+
+.button--plain {
+  background-color: transparent;
+  color: $secondaryOp80;
+  padding: 0 0.2rem;
+  border: none;
+
+  & path {
+    fill: $secondaryOp80;
+  }
+
+  &:hover {
+    color: rgba($third, 0.7);
+
+    & path {
+      fill: rgba($third, 0.7);
+    }
+  }
+
+  &.active {
+    color: $third;
+
+    & path {
+      fill: $third;
+    }
+  }
+}
+
+.button--outlined {
+  padding: 0.3rem 1rem;
+  border: 2px solid $third;
+  background-color: $secondaryOp80;
+  color: $third;
+  @media (min-width: $layout-breakpoint-tablet) {
+    background-color: transparent;
+    color: $thirdOP40;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  & path {
+    fill: $third;
+    @media (min-width: $layout-breakpoint-tablet) {
+      fill: $thirdOP40;
+    }
+  }
+
+  &:hover {
+    color: rgba($third, 0.7);
+    background-color: $thirdOP40;
+
+    & path {
+      fill: rgba($third, 0.7);
+    }
+  }
+
+  &.active {
+    color: $negative;
+    background-color: $third;
+
+    & path {
+      fill: $negative;
+    }
+  }
+}
+
+.content {
+  & .lead {
+    display: none;
+    position: fixed;
+    top: 10vh;
+    left: calc((100% - 60%) / 2);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2rem 1rem 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    box-shadow: #FFFFFF 0px 0px 10px 0px;
+    transition: all 0.7s ease-in-out;
+    width: 60%;
+    z-index: 105;
+    line-height: 1.3rem;
+    @media (min-width: $layout-breakpoint-tablet) {
+      padding: 3rem 2rem 1rem;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+      width: 60%;
+      left: calc((100% - 60%) / 2);
+    }
+    @media (min-width: $layout-breakpoint-desktop) {
+      padding: 3rem 2rem 1rem;
+      font-size: 1.6rem;
+      line-height: 2.8rem;
+      width: 40%;
+      left: calc(100% - 40% - 200px);
+    }
+
+    &:first-letter {
+      color: $primaryOp40;
+      padding-right: 0.2rem;
+      text-transform: Capitalize;
+      font-size: 4rem;
+      @media (min-width: $layout-breakpoint-tablet) {
+        font-size: 6rem;
+      }
+      @media (min-width: $layout-breakpoint-laptop) {
+        font-size: 8rem;
+      }
+    }
+
+    &.visible {
+      display: block;
+    }
+  }
+
+  & .books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+    @media (min-width: 450px) {
+      justify-content: start;
+    }
+
+    .cover {
+      margin: 1rem;
+      width: 80%;
+      @media (min-width: 450px) {
+        width: calc((100% - 4rem) / 2);
+      }
+      @media (min-width: 768px) {
+        width: calc((100% - 6rem) / 3);
+      }
+      @media (min-width: 1500px) {
+        width: calc((100% - 10rem) / 5);
+      }
+      @media (min-width: 2200px) {
+        width: calc((100% - 16rem) / 8);
+      }
+
+      .book__card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: $secondaryOp80;
+        padding: 1rem;
+        border-radius: 1rem;
+        justify-content: center;
+        align-content: center;
+      }
+
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  & .g-title {
+    h1 {
+      padding: 3rem 2.1rem 1rem;
+      font-size: 1rem;
+      line-height: 1.3rem;
+      @media (min-width: $layout-breakpoint-tablet) {
+        font-size: 1.4rem;
+        line-height: 2.4rem;
+      }
+      @media (min-width: $layout-breakpoint-desktop) {
+        font-size: 1.6rem;
+        line-height: 2.8rem;
+      }
+
+      &:first-letter {
+        color: $primaryOp40;
+        padding-right: 0.1rem;
+        text-transform: Capitalize;
+        font-size: 4rem;
+        @media (min-width: $layout-breakpoint-tablet) {
+          font-size: 6rem;
+        }
+        @media (min-width: $layout-breakpoint-laptop) {
+          font-size: 8rem;
+        }
+      }
+    }
+    p {
+      padding: 0 2.8rem;
+    }
+  }
+
+}
+
+.lead__wrapper {
+  padding: 1.9rem;
+  @media (orientation: landscape) or (min-width: $layout-breakpoint-laptop) {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-basis: 50%;
+    height: 100%;
+  }
+
+  .title__wrapper {
+    background-color: $primaryOp40;
+    padding: 3rem;
+    border-image-width: 30px;
+    border-style: solid;
+    flex-basis: 20%;
+    display: flex;
+    align-items: center;
+
+    .book {
+      &__title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: $primary;
+        @media (min-width: $layout-breakpoint-tablet) {
+          font-size: 2.5rem;
+        }
+      }
+
+      &__subtitle {
+        font-size: 1rem;
+        font-weight: 400;
+        color: $third;
+        @media (min-width: $layout-breakpoint-tablet) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  .titleimg__wrapper {
+    display: block;
+    position: relative;
+    min-height: 200px;
+    height: 30vh;
+    width: 100%;
+
+    @media (orientation: landscape) or (min-width: $layout-breakpoint-laptop) {
+      flex-basis: 50%;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .titleimg {
+      width: 100%;
+      height: 100%;
+      opacity: 0.9;
+      border: 3px solid $primary;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .coverimg {
+      position: absolute;
+      left: 0.5rem;
+      z-index: 600;
+      bottom: 0.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      &.carousel--shown {
+        @media (orientation: landscape) or (min-width: $layout-breakpoint-laptop) {
+          bottom: 0.5rem;
+          top: auto;
+        }
+        bottom: 208px;
+      }
+    }
+  }
+
+  .carousel_position {
+    min-height: 150px;
+    width: 100%;
+    @media (orientation: landscape) or (min-width: $layout-breakpoint-laptop) {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      width: 30%;
+      min-height: 0;
+    }
+  }
+
+  aside {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: $primaryOp40;
+    padding: 3rem;
+    border-image-width: 30px;
+    border-style: solid;
+    justify-content: end;
+    @media (orientation: landscape) or (min-width: $layout-breakpoint-laptop) {
+      flex-basis: 20%;
+      margin-bottom: 0;
+    }
+
+    .book__info {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .book__links, .book__parts {
+        width: 100%;
+        @media (min-width: $layout-breakpoint-tablet) {
+          width: auto;
+          min-width: 40%;
+        }
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+
+          a {
+            color: $third;
+            text-decoration: none;
+
+            &:hover {
+              color: $primary;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
+
+
+.accent {
+  font-size: 6rem;
+  color: $primary;
+  letter-spacing: 3px;
+  @media (min-width: $layout-breakpoint-tablet) {
+    font-size: 9rem;
+  }
+}
+
+.spacer {
+  flex-basis: 100%;
+  flex-grow: 1;
+}
+
+.text__wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+
+  .main {
+    display: flex;
+    gap: 0;
+    align-items: baseline;
+    padding-top: 4rem;
+    line-height: 1.7rem;
+
+    h1 {
+      font-size: 1.5rem;
+      color: $primary;
+      margin: 1rem 0;
+      @media (min-width: $layout-breakpoint-tablet) {
+        font-size: 2rem;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.pointerevents--none {
+  pointer-events: none;
+}
+
+.main {
+  margin: 2rem;
+  margin-top: 0;
+  line-height: 1.5rem;
+  @media (max-width: $layout-breakpoint-tablet) and (orientation: landscape) {
+    position: fixed;
+    margin-top: 2rem;
+    margin-right: 4rem;
+    height: 45vh;
+    overflow-y: auto;
+  }
+  @media (orientation: landscape) and (min-width: $layout-breakpoint-tablet) {
+    margin-top: 2rem;
+    height: 60vh;
+    overflow-y: auto;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    color: $primary;
+    margin: 1rem 0;
+    @media (min-width: $layout-breakpoint-tablet) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.pa-2 {
+  padding: 2rem;
+}
