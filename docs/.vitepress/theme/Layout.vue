@@ -25,14 +25,17 @@ const bookframeStyle = computed(() => (frontmatter) => {
   return style
 })
 const isLandscape = ref(false);
+const isMobile = ref(false);
 const titleImg = ref(null);
-const coverImgHeight = ref(0);
-const carouselHeight = ref(0);
 const content = ref({frontmatter: {letter:'E'}, html: '<h1>rfahre mehr über Rodney Dent</h1><p>Drücke auf ein Sujets das dich interessiert!</p'});
+
+function getBackgroundImg(img){
+  return 'background-image: url("' + img +'")'
+}
+
 const handleResize = () => {
+  const isMobile = ref(false);
   isLandscape.value = window.innerHeight < window.innerWidth;
-  coverImgHeight.value = titleImg.value?.offsetHeight * 0.5;
-  carouselHeight.value = isLandscape.value ? titleImg.value?.offsetHeight / 2 - 24 : 200;
 };
 
 function handleTagClick(value) {
@@ -40,15 +43,11 @@ function handleTagClick(value) {
 }
 
 onMounted(() => {
+  isMobile.value = window.visualViewport.width < 600;
   isLandscape.value = window.innerHeight < window.innerWidth;
-  coverImgHeight.value = titleImg.value?.offsetHeight * 0.5;
-  carouselHeight.value = isLandscape.value ? titleImg.value?.offsetHeight / 2 - 24 : 200;
-
-  window.addEventListener('resize', handleResize)
   window.addEventListener('deviceorientation', handleResize)
 });
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
   window.removeEventListener('deviceorientation', handleResize)
 });
 
@@ -78,24 +77,22 @@ onUnmounted(() => {
             <h2 class="book__subtitle" v-html="frontmatter.subtitle"></h2>
           </div>
         </div>
-        <div class="titleimg__wrapper">
-          <div ref="titleImg" class="titleimg" :class="{'bg-secondary':!frontmatter.titleImg}">
-            <img v-if="frontmatter.titleImg" :src="frontmatter.titleImg" alt="titleimage">
+        <div class="titleimg__wrapper" :style="getBackgroundImg(frontmatter.titleImg)" :class="{'bg-secondary':!frontmatter.titleImg}">
+          <div class="titleimg_images__wrapper">
+            <div class="carousel_position">
+              <Carousel v-if="frontmatter.sketches.length && !isMobile"
+                        :items="frontmatter.sketches"
+                        :numbers-shown="isLandscape ? 1: 2"
+                        height="100%"
+                        object-fit="cover"></Carousel>
+            </div>
+            <div class="coverimg"
+                 :class="{'carousel--shown': frontmatter.sketches.length}"
+                 v-if="frontmatter.coverImg">
+              <img alt="book cover" :src="frontmatter.coverImg"/>
+            </div>
           </div>
-          <div class="coverimg"
-               :style="'height: ' + coverImgHeight + 'px;'"
-               :class="{'carousel--shown': frontmatter.sketches.length}"
-               v-if="frontmatter.coverImg && titleImg">
-            <img alt="book cover" :src="frontmatter.coverImg"/>
-          </div>
-          <div v-if="frontmatter.sketches.length && titleImg"
-               class="carousel_position"
-               :style="'height: ' + carouselHeight + 'px;'">
-            <Carousel :items="frontmatter.sketches"
-                      :numbers-shown="isLandscape ? 1: 2"
-                      height="100%"
-                      object-fit="cover"></Carousel>
-          </div>
+
         </div>
 
         <aside :style="bookframeStyle(frontmatter)">
@@ -110,6 +107,12 @@ onUnmounted(() => {
             </ul>
           </div>
         </aside>
+        <div v-if="frontmatter.sketches.length && isMobile" class="carousel_position--mobile">
+          <Carousel :items="frontmatter.sketches"
+                    :numbers-shown="isLandscape ? 1: 2"
+                    height="100%"
+                    object-fit="cover"></Carousel>
+        </div>
       </div>
       <div class="text__wrapper">
         <main class="main">
