@@ -87,7 +87,6 @@ onUnmounted(() => {
                         object-fit="cover"></Carousel>
             </div>
             <div class="coverimg"
-                 :class="{'carousel--shown': frontmatter.sketches.length}"
                  v-if="frontmatter.coverImg">
               <img alt="book cover" :src="frontmatter.coverImg"/>
             </div>
