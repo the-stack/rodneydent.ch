@@ -74,12 +74,12 @@ onUnmounted(() => {
         <div class="title__wrapper" :style="bookframeStyle(frontmatter)">
           <div>
             <h1 class="book__title" v-html="frontmatter.title"></h1>
-            <h2 class="book__subtitle" v-html="frontmatter.subtitle"></h2>
+            <h2 class="book__subtitle" v-if="frontmatter.subtitle" v-html="frontmatter.subtitle"></h2>
           </div>
         </div>
         <div class="titleimg__wrapper" :style="getBackgroundImg(frontmatter.titleImg)" :class="{'bg-secondary':!frontmatter.titleImg}">
           <div class="titleimg_images__wrapper">
-            <div class="carousel">
+            <div class="carousel-position">
               <Carousel v-if="frontmatter.sketches.length && !isMobile"
                         :items="frontmatter.sketches"
                         :numbers-shown="isLandscape ? 1: 2"
