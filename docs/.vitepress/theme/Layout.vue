@@ -79,7 +79,7 @@ onUnmounted(() => {
         </div>
         <div class="titleimg__wrapper" :style="getBackgroundImg(frontmatter.titleImg)" :class="{'bg-secondary':!frontmatter.titleImg}">
           <div class="titleimg_images__wrapper">
-            <div class="carousel_position">
+            <div class="carousel">
               <Carousel v-if="frontmatter.sketches.length && !isMobile"
                         :items="frontmatter.sketches"
                         :numbers-shown="isLandscape ? 1: 2"
@@ -106,7 +106,7 @@ onUnmounted(() => {
             </ul>
           </div>
         </aside>
-        <div v-if="frontmatter.sketches.length && isMobile" class="carousel_position--mobile">
+        <div v-if="frontmatter.sketches.length && isMobile" class="carousel--mobile">
           <Carousel :items="frontmatter.sketches"
                     :numbers-shown="isLandscape ? 1: 2"
                     height="100%"
